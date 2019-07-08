@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<header xmlns="http://www.w3.org/1999/html">
+     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</header>
+
+<body>
+
+{% if user.is_authenticated %}
+<button onclick="location.href='{% url 'user_app/:logout/' %}'" type="button" class="btn btn-outline-dark"> <h5> LogOut({{request.user}}) </h5> </button>
+     {% else %}
+     <button onclick="location.href='{% url 'user_app/:registration/' %}'" type="button" class="btn btn-outline-dark"> <h5> Registration </h5> </button>
+     <button onclick="location.href='{% url 'user_app/:authorization/' %}'" type="button" class="btn btn-outline-dark"> <h5> LogIn </h5> </button>
+             {% endif %}
+
+
+</body>
+</html>

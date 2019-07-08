@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load poll_extras %}
+    {% include 'includes/header.html' %}
+    <style>
+    .main_row { display: flex;
+     margin: 10;}
+    .information  {
+    clear: both;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;}
+    <meta charset="UTF-8">
+    </style>
+    <title>Title</title>
+</head>
+<body>
+
+<div class="top row"> <h2> <center> "{{ book.name }}" Purchase Page </center> </h2></div>
+<div class="main_row" >
+    <img src="{{book.image.url}}" width="180" height="275" border="1" alt="{{book.name}}">
+    <form action="/purchase/order-input/{{book.name}}" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        {% if book.is_sale %}
+        <p> <strike> <font color="red"> &nbsp;  Old Price: {{book.price}} UAH &nbsp; </red> </font> </strike></p> <font color="green"> &nbsp; &nbsp;<h5><b> SALE price: {{book.price|new_price:book.percent_sale}} UAH SALE is {{book.percent_sale}}% </b> </h5></font>
+        {% else %}
+<font color="green"> <h4> Price: {{ book.price }} UAH</h4></font>
+        {% endif %}
+        <button type="submit" class="btn btn-success btn-lg btn-block"> BUY  </button>
+    </form>
+</div>
+<div class="information">
+<br><h3> Order will be valid 4 days till tomorrow.
+    <a href="{% url 'contact-information/' %}"> &nbsp; More about how to find us. &nbsp; </a> </h3> </div>
+
+</body>
+</html>

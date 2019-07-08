@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>t_store</title>
+</head>
+<body>
+{% include 'includes/header.html' %}
+{% block content %}
+{% for genr in genres %}
+<h2> {{genr}} </h2>
+{% for book in books %}
+{% for a in book.book_genre.all %}
+{% if genr == a %}
+
+<a href="{% url 'book_detail' book.name %}"> {{book.name}}</a>
+
+{% endif %}
+{% endfor %}
+{% endfor %}
+{% endfor %}
+{% endblock %}
+
+{% include 'includes/footer.html' %}
+
+</body>
+</html>

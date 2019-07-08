@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'includes/index.html' %}
+    <meta charset="UTF-8">
+    <title> Registration </title>
+    <style>
+    .colortext {
+     color: red;
+   }
+   </style>
+</head>
+<body>
+<form action="" method="post">  {% csrf_token %}
+{% for field in form %}
+<center>{{field.label}}</center>
+<center><div>{{field}}</div></center>
+    {% if field.errors %}
+    <h5><span class="colortext">The following errors occurred during registration: </span> </h5>
+    <p>{{ field.errors }}</p>
+    {% endif %}
+{% endfor %}
+
+  <center>  <button type="submit" class="btn btn-primary"> Registration </button> </center>
+
+</form>
+</body>
+</html>

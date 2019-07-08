@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+    .price { display: flex; }
+    .genre { display: flex; }
+    .author {display:flex; }
+    .cnt {
+display: flex;
+align-items: flex-start;
+</style>
+
+    <meta charset="UTF-8">
+    <title>t_store</title>
+
+</head>
+<body>
+{% load poll_extras %}
+{% include 'includes/header.html' %}
+<div class="cnt">
+    <div class="top-layer">
+        <img src="{{book.image.url}}" width="180" height="275" border="1" alt="{{book.name}}">
+    </div>
+    {% if book.new %}
+    <div class="p-3 mb-2 bg-info text-white"> <h4> NEW </h4> </div>
+    {% endif %}
+    {% if book.is_sale %}
+    <div class="p-3 mb-2 bg-warning text-dark"> <h4> SALE </h4></div>
+    {% endif %}
+                   </div>
+        <div class="right-layer">
+            <button type="button"  class="btn btn-primary btn-lg btn-success"> <a href="{% url 'purchase/' book.name %}"> BUY the "{{book.name}}" no DELIVERY </a></button>
+            <button type="button"  class="btn btn-primary btn-lg btn-warning"> <a href="{% url 'purchase-delivery/' book.name %}"> BUY the "{{book.name}}" + DELIVERY </a></button>
+        <h2> {{book.name}} </h2>
+
+   <div class="author"> <h4> Author: </h4>
+        {%for author in book.author.all %}
+                {% if forloop.counter > 1 %}
+                <h5>&nbsp; and &nbsp; </h5>
+        {% endif %}
+        <h4> {{author}} </h4>
+        {% endfor %}
+            </div>
+
+            <div class="genre"> <h4> Genre: </h4>
+        {%for genre in book.book_genre.all %}
+                {% if forloop.counter > 1 %}
+                <h5>&nbsp; and &nbsp; </h5>
+        {% endif %}
+        <h4> {{genre}} </h4>
+        {% endfor %}
+
+            </div>
+</div>
+<h4> Quantity of pages: {{ book.pages }} </h4>
+<div class="description" > Description: {{ book.description }} </div>
+        {% if book.is_sale %}
+<div class="price" >
+    <p> <strike> <font color="red"> &nbsp;  Old Price: {{book.price}} UAH &nbsp; </red> </font> </strike></p> <font color="green"> &nbsp; &nbsp;<h5><b> SALE price: {{book.price|new_price:book.percent_sale}} UAH SALE is {{book.percent_sale}}% </font> </b> </h5>
+</div>
+        {% else %}
+<font color="green"> <h4> Price: {{ book.price }} UAH</h4></font>
+        {% endif %}
+<p>Date and time off adding: {{book.create_at}}</p>
+{% if user.is_authenticated %}
+<form action="/book/review/{{book.name}}" method="post">
+     <font color="green"> <h5>Add your review about "{{book.name}}": </h5> </font>
+        {% csrf_token %}
+        {{form.as_p}}
+     <button type="submit" class="btn btn-success btn-lg"> Print the review  </button>
+{% endif %}
+</form>
+<br>
+     {% for i in review %}
+     {% if i.book ==  book %}
+<div class="shadow-none p-3 mb-5 bg-light rounded">
+     <font color="green"> <h5> {{i.author}} </h5> </font>
+     <font color="green"> <h5> {{i.time_review}} </h5> </font>
+    {{i.review}}
+    </div>
+     {% endif %}
+     {% endfor%}
+{% include 'includes/footer.html' %}
+</body>
+</html>

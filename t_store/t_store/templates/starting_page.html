@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>t_store</title>
+         <style type="text/css">
+        <style type="text/css">
+
+    #carousel {
+    height: 10em;
+    position: relative }
+    #carousel {
+    margin: 0;
+    background: yellow;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%) }
+
+body { margin: 0; }
+   #sidebar, #content { position: absolute; }
+   #sidebar, #content { overflow: auto; padding: 10px; }
+
+   #sidebar {
+    width: 15%; border-right: 1px ;
+    top: 35px
+    bottom: 100px;
+   }
+   #content {
+    top: 60px; /* Расстояние от верхнего края */
+    left: 200px; /* Расстояние от левого края */
+    bottom: 30px; right: 0;
+   }
+  </style>
+</head>
+<body>
+{% include 'includes/header_main.html' %}
+
+
+<div id="sidebar" class="btn-group-vertical" style="margin-left: 10px">
+
+        <button onclick="location.href='{% url 'contact-information/' %}'" type="button" class="btn btn-outline-dark"> <h4> About us </h4> </button>
+        <button onclick="location.href='{% url 'new-book/' %}'" type="button" class="btn btn-outline-dark"> <h4> NEW Books </h4> </button></a>
+        <button onclick="location.href='{% url 'book-sale/' %}'" type="button" class="btn btn-outline-dark"> <h4> SALE </h4> </button></a>
+        <button onclick="location.href='{% url 'book-genre/' %}'" type="button" class="btn btn-outline-dark"> <h4> Books by genre </h4> </button></a>
+        <button onclick="location.href='{% url 'all-book/' %}'" type="button" class="btn btn-outline-dark"> <h4> All Books </h4> </button></a>
+        <button onclick="location.href='{% url 'contact-information/' %}'" type="button" class="btn btn-outline-dark"> <h4> How to find us </h4> </button></a>
+        <button onclick="location.href='{% url 'admin:index' %}'" type="button" class="btn btn-outline-dark"> <h4> Administration </h4> </button></a>
+        {% if user.is_authenticated %}
+        <button onclick="location.href='{% url 'user_app/:logout/' %}'" type="button" class="btn btn-outline-dark"> <h4> LogOut <br>({{request.user}}) </h4> </button></a>
+        {% else %}
+        <button onclick="location.href='{% url 'user_app/:registration/' %}'" type="button" class="btn btn-outline-dark"> <h4> Registration </h4> </button></a>
+        <button onclick="location.href='{% url 'user_app/:authorization/' %}'" type="button" class="btn btn-outline-dark"> <h4> Authorization </h4> </button></a>
+        {% endif %}
+        </div>
+
+<div id="content">
+
+<div id="carousel" class="carousel slide" data-ride="carousel" data-interval="3500">
+<div class="carousel-inner">
+{% for item in carousel %}
+    {% if forloop.counter == 1 %}
+        <div class="carousel-item active">
+    {% else %}
+        <div class="carousel-item">
+    {% endif %}
+             <img height="510" width="1000" src="{{ item.image.url }}" >
+            <div class="carousel-caption">
+                <blockquote>
+    <h3 style="color:#000000"> {{ item.name }} </h3>
+    <p style="color:#000000"> {{ item.description }} </p>
+                    </blockquote>
+
+        </div>
+        </div>
+            {% endfor %}
+        </div>
+    </div>
+        </div>
+</div>
+</div>
+<script>
+$('.carousel').carousel()
+</script>
+</body>
+
+</html>
+

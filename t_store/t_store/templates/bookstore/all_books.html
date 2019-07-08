@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>t_store</title>
+</head>
+<body>
+{% load poll_extras %}
+{% include 'includes/header.html' %}
+    {% for book in books%}
+
+   <div class="wrap">
+       <a href="{% url 'book_detail' book.name %}"> <button> More about {{book.name}} </button></a> <br>
+       {% for a in book.author.all %}
+         {{a}}
+         {% endfor %} <br><div class="card-body">
+       <img src="{{book.image.url}}" width="100" height="150" alt="{{book.image.url}}" border="1" /> <br>
+         {% if book.is_sale == True %}
+         <p><span style="text-decoration:line-through"> Old Price: {{book.price}} UAH </span> SALE price: {{book.price|new_price:book.percent_sale}} UAH</p>
+         {% else %}
+       <p> price: {{book.price}} </p>
+       {% endif %}
+         {% for a in book.book_genre.all %}
+         {{a}}
+         {% endfor %}  <br>
+
+       {% if book.is_sale == True %}
+       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+       <style type="text/css">
+        #layer1 {
+        width: 75px;
+        background: #3ca;
+        height: 50px;
+        padding: 1px;
+         }
+        </style>
+       <div id="layer1"> <h2> SALE </h2> </div>
+       {% endif %}
+
+       {% if book.new == True %}
+ <style type="text/css">
+   #layer2 {
+     width: 75px;
+    background: #fc0;
+    height: 50px;
+    padding: 1px;
+   }
+   </style>
+<div id="layer2"> <h2> NEW </h2> </div>
+{% endif %}
+       {% endfor %}
+   </style>
+
+   </div>
+
+
+{% include 'includes/footer.html' %}
+
+</body>
+</html>
+

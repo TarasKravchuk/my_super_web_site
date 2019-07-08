@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SALE</title>
+</head>
+<body>
+{% include 'includes/header.html' %}
+<div class="container">
+    {% for book in books %}
+    {% if book.new %}
+<div class="card">
+  <div class="card-body">
+      <div class="top-part">
+      <img src="{{ book.image.url }}" width="150" height="200" border="1"  alt="{{ book.name }}">
+          <div class="add-widget">
+          {% if book.new %}
+              <div class="p-3 mb-2 bg-info text-white"> <h4> NEW </h4> </div>
+          {% endif %}
+                 {% if book.is_sale %}
+              <div class="p-3 mb-2 bg-warning text-dark"> <h4> SALE </h4></div>
+          {% endif %}
+                   </div>
+      <br>
+  </div>
+    <h5 class="card-title">{{book.name|truncatechars:32}} <br>
+    by {% for author in book.author.all %} {{author|truncatechars:32}}  {% endfor %} <br>
+    Genre: {% for genre in book.book_genre.all %}
+        {% if forloop.counter > 1 %}
+        and
+        {% endif %}
+        {{genre}} {% endfor %} </h5>
+    <p class="card-text"> {{ book.description|truncatechars:250}}  </p>
+    <a href="{% url 'book_detail' book.name %}" class="btn btn-primary"> More about {{book.name|truncatechars:20}}  </a>
+
+  </div>
+</div>
+    {% endif %}
+    {% endfor %}
+</div>
+
+</body>
+
+
+{% include 'includes/footer.html' %}
+
+</body>
+</html>
+
+{% include 'includes/footer.html' %}
+
+</body>
+</html>

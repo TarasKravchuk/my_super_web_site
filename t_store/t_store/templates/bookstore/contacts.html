@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>t_store</title>
+
+    <style>
+        .wrap{
+        display: flex;
+        justify-content: space-between;
+        width: 80%;
+        margin: auto;
+        }
+
+        .left{
+            width: 50%;
+        }
+
+        .right{
+            width: 45%;
+        }
+
+        .right iframe{
+            max-width: 100%;
+        }
+
+
+    </style>
+</head>
+<body>
+<div>
+    {% include 'includes/header.html' %}
+
+    <div class="wrap">
+        <div class="left">
+
+            <div>
+                <p>
+                    Our a ddress: <br> Kyiv, Peremogy
+                    prt 39 <br>
+                    Working hours:<br> Mon-Fri form 10:00 till 21:00 <br>
+                    Sat form 10:00 till 17:00 <br>
+                    Sun form 10:00 till 15:00 <br>
+                    Contact email: happycloud2012@gmail.com <br>
+                    tel +38099 500 01 02 <br>
+                </p>
+            </div>
+        </div>
+
+        <div class="right">
+            <a href="#">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2540.3692858729223!2d30.45044121573148!3d50.4528476794757!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d4cc2f350e19d5%3A0x284d3d67172d5238!2z0L_RgNC-0YHQvy4g0J_QvtCx0LXQtNGLLCAzOSwg0JrQuNC10LIsIDAyMDAw!5e0!3m2!1sru!2sua!4v1560093049400!5m2!1sru!2sua"
+                        width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+            </a>
+        </div>
+
+    </div>
+</div>
+
+<div class="footer-wrapper">
+            {% include 'includes/footer.html' %}
+        </div>
+
+</body>
+</html>

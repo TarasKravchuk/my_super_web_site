@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'includes/header.html' %}
+
+    <meta charset="UTF-8">
+    <title>success</title>
+</head>
+<body>
+<div>
+    <div class="main_row" >
+    <img src="{{product.image.url}}" width="180" height="275" border="1" alt="{{book.name}}">
+Your order was successful, our specialist will contact with you during 24 hours.
+Your order are {{ product.name }} wich coast  {{order.price}} UAH<br>
+{% if order.adress != None %}
+Delivery will coast additionaly 50 UAH in Kiev and 100 UAH to other regions of Ukraine.
+{% else %}
+        <h3> Order will be valid 4 days till tomorrow. </h3>
+        {% endif %}
+  <h3>  <a href="{% url 'contact-information/' %}"> &nbsp; More about how to find us. &nbsp; </a> </h3> </div>
+
+</div>
+</body>
+{% include 'includes/footer.html' %}
+</html>
